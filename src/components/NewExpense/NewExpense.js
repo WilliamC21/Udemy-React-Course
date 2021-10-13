@@ -3,18 +3,14 @@ import "./NewExpense.css";
 import ExpenseForm from "./ExpenseForm.js";
 
 const NewExpense = (props) => {
-  //comp to add a new expense to the list of expenses
-  const [isEditing, setIsEditing] = useState(false); //initially user isnt adding, so false used to conditionally 'close' the form
-
+  const [isEditing, setIsEditing] = useState(false);
   const saveExpenseDataHandler = (enteredExpenseData) => {
-    //handler which uses new expense data as arg
     const expenseData = {
-      //create new expense object
-      ...enteredExpenseData, //takes form data
-      id: Math.random().toString, //adds a random ID to assist react
+      ...enteredExpenseData,
+      id: Math.random().toString,
     };
-    props.onAddExpense(expenseData); //triggers the expense function in app to add the new expense to expenses list
-    setIsEditing(false); //closes the form on submission
+    props.onAddExpense(expenseData);
+    setIsEditing(false);
   };
 
   const startEditingHandler = () => {
@@ -24,18 +20,16 @@ const NewExpense = (props) => {
   const stopEditingHandler = () => {
     setIsEditing(false);
   };
-  //functions used to either close or open the expense form box
 
-  //JSX
   return (
     <div className="new-expense">
-      {!isEditing && ( //is state of is editing false, render just the add button
-        <button onClick={startEditingHandler}>Add New Expense</button> //buttons function is to open the expense form
+      {!isEditing && (
+        <button onClick={startEditingHandler}>Add New Expense</button>
       )}
-      {isEditing && ( //if true
-        <ExpenseForm // render the expense form
-          onSaveExpenseData={saveExpenseDataHandler} //prop passed used to save the expense created within form comp
-          onCancel={stopEditingHandler} //prop used to give cancel button functionality
+      {isEditing && (
+        <ExpenseForm
+          onSaveExpenseData={saveExpenseDataHandler}
+          onCancel={stopEditingHandler}
         />
       )}
     </div>

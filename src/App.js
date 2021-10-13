@@ -23,24 +23,18 @@ const DUMMY_EXPENSES = [
 ];
 //
 const App = () => {
-  const [expenses, setExpenses] = useState(DUMMY_EXPENSES); //state is iniitailly set to the dummy expenses
+  const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
 
   const addExpenseHandler = (expense) => {
-    //triggered by new expense prop
-    //handler to allow adding an expense via the new expense component
     setExpenses((prevExpenses) => {
-      //pass the previous expenses to mantain them on the list
-      return [expense, ...prevExpenses]; //add the new expense to the list
+      return [expense, ...prevExpenses];
     });
   };
 
   return (
-    //JSX code
     <div>
       <NewExpense onAddExpense={addExpenseHandler} />
-      {/form at page top that allows adding expense/}
       <Expenses expenses={expenses} />{" "}
-      {/comp that holds and displays all existing/}
     </div>
   );
 };
