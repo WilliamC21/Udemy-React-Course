@@ -3,59 +3,45 @@ import React, { useState } from "react";
 import "./ExpenseForm.css";
 
 const ExpenseForm = (props) => {
-  const [enteredTitle, setEnteredTitle] = useState("");
+  //props passed
+  const [enteredTitle, setEnteredTitle] = useState(""); //states set up for each of the properties of an expense, require state to update without refresh
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
-  // const [userInput, setUserInput] = useState({
-  //   enteredTitle: '',
-  //   enteredAmount: '',
-  //   enteredDate: '',
-  // });
 
+  //three functions to triggger the state updates for the properties
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
-    // setUserInput({
-    //   ...userInput,
-    //   enteredTitle: event.target.value,
-    // });
-    // setUserInput((prevState) => {
-    //   return { ...prevState, enteredTitle: event.target.value };
-    // });
   };
 
   const amountChangeHandler = (event) => {
     setEnteredAmount(event.target.value);
-    // setUserInput({
-    //   ...userInput,
-    //   enteredAmount: event.target.value,
-    // });
   };
 
   const dateChangeHandler = (event) => {
     setEnteredDate(event.target.value);
-    // setUserInput({
-    //   ...userInput,
-    //   enteredDate: event.target.value,
-    // });
   };
 
+  //behaviour for when the submit button is pressed
   const submitHandler = (event) => {
-    event.preventDefault();
+    event.preventDefault(); //stops page reload
 
     const expenseData = {
+      //takes the values of each form box and packages into new expense data
       title: enteredTitle,
-      amount: +enteredAmount,
+      amount: +enteredAmount, //+plus sing enforces integer pver string
       date: new Date(enteredDate),
     };
 
-    props.onSaveExpenseData(expenseData);
-    setEnteredTitle("");
+    props.onSaveExpenseData(expenseData); //pass the expense data to the new expense comp to run the 'saveExpenseDataHandler'
+    setEnteredTitle(""); //reset all the fields to being empty
     setEnteredAmount("");
     setEnteredDate("");
   };
 
   return (
     <form onSubmit={submitHandler}>
+      {" "}
+      {/define the submission behaviour, pass what function to execute/}
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
@@ -63,7 +49,10 @@ const ExpenseForm = (props) => {
             type="text"
             value={enteredTitle}
             onChange={titleChangeHandler}
-          />
+          />{" "}
+          {
+            /for each field the state of that prop is updated as it is being changed/
+          }
         </div>
         <div className="new-expense__control">
           <label>Amount</label>
@@ -88,9 +77,14 @@ const ExpenseForm = (props) => {
       </div>
       <div className="new-expense__actions">
         <button type="button" onClick={props.onCancel}>
+          {" "}
+          {
+            /using the props for cancel, pass up the event to trigger closing form/
+          }
           Cancel
         </button>
-        <button type="submit">Add Expense</button>
+        <button type="submit">Add Expense</button>{" "}
+        {/type=submit, triggers the function as defined above/}
       </div>
     </form>
   );

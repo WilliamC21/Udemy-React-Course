@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import Expenses from "./components/Expenses/Expenses";
+import Expenses from "./components/Expenses/Expenses"; //imports expenses and new expense
 import NewExpense from "./components/NewExpense/NewExpense";
-//
+//App css serves as the index page for the project
 const DUMMY_EXPENSES = [
+  //dummy expenses used to populate lists at start, wouldnt be required in real imp
   {
     title: "Toilet Paper",
     amount: 94.12,
@@ -22,18 +23,24 @@ const DUMMY_EXPENSES = [
 ];
 //
 const App = () => {
-  const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
+  const [expenses, setExpenses] = useState(DUMMY_EXPENSES); //state is iniitailly set to the dummy expenses
 
   const addExpenseHandler = (expense) => {
+    //triggered by new expense prop
+    //handler to allow adding an expense via the new expense component
     setExpenses((prevExpenses) => {
-      return [expense, ...prevExpenses];
+      //pass the previous expenses to mantain them on the list
+      return [expense, ...prevExpenses]; //add the new expense to the list
     });
   };
 
   return (
+    //JSX code
     <div>
       <NewExpense onAddExpense={addExpenseHandler} />
-      <Expenses expenses={expenses} />
+      {/form at page top that allows adding expense/}
+      <Expenses expenses={expenses} />{" "}
+      {/comp that holds and displays all existing/}
     </div>
   );
 };
